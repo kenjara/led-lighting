@@ -1,6 +1,12 @@
-int red = 9;
-int green = 10;
-int blue = 11;
+int redPin = 9;
+int greenPin = 10;
+int bluePin = 11;
+
+int red = 0;
+int green = 0;
+int blue = 0;
+
+bool dir = 1;
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,17 +19,30 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  analogWrite(red, 255);
-  delay(1000);
-  analogWrite(green, 255);
-  delay(1000);
-  analogWrite(blue, 255);
-  delay(1000);
-  analogWrite(red, 0);
-  delay(1000);
-  analogWrite(green, 0);
-  delay(1000);
-  analogWrite(blue, 0);
-  delay(1000);
+  if (red < 255 && dir == 1)
+  {
+    red ++;    
+  }
+  else if (red > 0 && dir == 0)
+  {
+    red --;
+  }
+  else
+  {
+    dir = !dir;
+  }
+  
+
+  setColour(red,green,blue);
+  delay(10);
 
 }
+
+void setColour(int r,int g, int b)
+{
+    analogWrite(redPin, r);
+    analogWrite(greenPin, g);
+    analogWrite(blue, b);
+
+}
+
